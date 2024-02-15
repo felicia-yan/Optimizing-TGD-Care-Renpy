@@ -1,4 +1,4 @@
-﻿# The script of the game goes in this file.
+# The script of the game goes in this file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
@@ -59,6 +59,7 @@ label start:
 
     label last_line: 
         f "last line to say"
+	f "this is a test for updating the repo"
 
     # This ends the game.
 
