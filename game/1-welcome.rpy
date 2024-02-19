@@ -119,5 +119,17 @@ label start:
     
     label tutorial: 
         m "Now, let me show you around. We've got a lot of work to do!"
+       
+        m "So, you're already familiar with the choice menu. As you spend more time at the clinic, you'll be making a lot of choices, mainly about how to respond to people. We'll try not to wear you out with too many choices though!"
+        
+        m "Before we step inside the clinic, I also want to show you how to save your progress."
+
+        m "See that button there? If you select that, you'll open a menu where you can save your progress. Saving means that if you close the game and come back, you can \"Load\" it on the start screen and continue your learning journey."
+
+        m "We'll also encourage you to save throughout your time here, after important events, so keep that in mind!"
+
+        m "By the way, in that same menu, you'll see an \"Options\" button. If you select that, you'll be able to adjust accessibility features, as well as things like music and voice over volume."
+
+        m "Let\'s save here, shall we? That was a lot of information!"
 
     return
