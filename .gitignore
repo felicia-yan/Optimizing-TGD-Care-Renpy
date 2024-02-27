@@ -8,6 +8,7 @@
 #Ignored script extensions
 *.rpyc
 *.rpymc
+*.rpym
 *.rpyb
 
 #Ignored base folder files
