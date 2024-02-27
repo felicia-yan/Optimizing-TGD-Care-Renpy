@@ -8,6 +8,7 @@
 #Ignored script extensions
 *.rpyc
 *.rpymc
+*.rpyb
 
 #Ignored base folder files
 errors.txt
@@ -15,7 +16,7 @@ log.txt
 traceback.txt
 
 #Ignored default folders
-/audio
-/images
-/cache
-/saves
+game/audio
+game/images
+game/cache
+game/saves
