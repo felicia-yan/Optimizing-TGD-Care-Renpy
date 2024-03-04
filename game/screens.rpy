@@ -218,8 +218,8 @@ style choice_button is button
 style choice_button_text is button_text
 
 style choice_vbox:
-    xalign 0.5
-    ypos 405
+    xalign 0.95
+    ypos 600
     yanchor 0.5
 
     spacing gui.choice_spacing
@@ -286,60 +286,113 @@ style quick_button_text:
 ## to other menus, and to start the game.
 
 screen navigation():
+    if renpy.get_screen("main_menu"):
+        grid 3 2:
+            style_prefix "gnavigation"
 
-    vbox:
-        style_prefix "navigation"
+            xalign 0.5
+            yalign 0.8
 
-        xpos gui.navigation_xpos
-        yalign 0.5
+            spacing 80
 
-        spacing gui.navigation_spacing
+            if main_menu:
 
-        if main_menu:
+                textbutton _("Start") action Start()
 
-            textbutton _("Start") action Start()
+            else:
 
-        else:
+                textbutton _("History") action ShowMenu("history")
 
-            textbutton _("History") action ShowMenu("history")
+                textbutton _("Save") action ShowMenu("save")
 
-            textbutton _("Save") action ShowMenu("save")
+            textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Load") action ShowMenu("load")
+            textbutton _("Preferences") action ShowMenu("preferences")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+            if _in_replay:
 
-        if _in_replay:
+                textbutton _("End Replay") action EndReplay(confirm=True)
 
-            textbutton _("End Replay") action EndReplay(confirm=True)
+            elif not main_menu:
 
-        elif not main_menu:
+                textbutton _("Main Menu") action MainMenu()
 
-            textbutton _("Main Menu") action MainMenu()
+            textbutton _("About") action ShowMenu("about")
 
-        textbutton _("About") action ShowMenu("about")
+            if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+                ## Help isn't necessary or relevant to mobile devices.
+                textbutton _("Help") action ShowMenu("help")
 
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            if renpy.variant("pc"):
 
-        if renpy.variant("pc"):
+                ## The quit button is banned on iOS and unnecessary on Android and
+                ## Web.
+                textbutton _("Quit") action Quit(confirm=not main_menu)
+    else: 
+        vbox:
+            style_prefix "navigation"
 
-            ## The quit button is banned on iOS and unnecessary on Android and
-            ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            xpos gui.navigation_xpos
+            yalign 0.5
 
+            spacing gui.navigation_spacing
+
+            if main_menu:
+
+                textbutton _("Start") action Start()
+
+            else:
+
+                textbutton _("History") action ShowMenu("history")
+
+                textbutton _("Save") action ShowMenu("save")
+
+            textbutton _("Load") action ShowMenu("load")
+
+            textbutton _("Preferences") action ShowMenu("preferences")
+
+            if _in_replay:
+
+                textbutton _("End Replay") action EndReplay(confirm=True)
+
+            elif not main_menu:
+
+                textbutton _("Main Menu") action MainMenu()
+
+            textbutton _("About") action ShowMenu("about")
+
+            if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+
+                ## Help isn't necessary or relevant to mobile devices.
+                textbutton _("Help") action ShowMenu("help")
+
+            if renpy.variant("pc"):
+
+                ## The quit button is banned on iOS and unnecessary on Android and
+                ## Web.
+                textbutton _("Quit") action Quit(confirm=not main_menu)
 
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
+style gnavigation_button is navigation_button
+style gnavigation_button_text is navigation_button_text
 
 style navigation_button:
     size_group "navigation"
     properties gui.button_properties("navigation_button")
-
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
+    font "Gilbert.otf"
+
+style gnavigation_button: 
+    background "#01B4E3"
+    padding (20, 20)
+style gnavigation_button_text: 
+    xalign 0.5
+    idle_color "#FFFFFF"
+    hover_color "#ADEEFF"
+
 
 
 ## Main Menu screen ############################################################
@@ -385,7 +438,7 @@ style main_menu_frame:
     xsize 420
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    # background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -1155,8 +1208,8 @@ screen confirm(message, yes_action, no_action):
     frame:
 
         vbox:
-            xalign .5
-            yalign .5
+            xalign 0.5
+            yalign 0.5
             spacing 45
 
             label _(message):
@@ -1183,8 +1236,8 @@ style confirm_button_text is gui_medium_button_text
 style confirm_frame:
     background Frame([ "gui/confirm_frame.png", "gui/frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
     padding gui.confirm_frame_borders.padding
-    xalign .5
-    yalign .5
+    xalign 0.5
+    yalign 0.5
 
 style confirm_prompt_text:
     textalign 0.5
@@ -1192,9 +1245,14 @@ style confirm_prompt_text:
 
 style confirm_button:
     properties gui.button_properties("confirm_button")
+    background "#00B3E3"
+    padding (50, 20)
 
 style confirm_button_text:
     properties gui.text_properties("confirm_button")
+    xalign 0.5
+    idle_color "#FFFFFF"
+    hover_color "#ADEEFF"
 
 
 ## Skip indicator screen #######################################################

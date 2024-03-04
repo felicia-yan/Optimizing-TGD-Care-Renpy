@@ -25,7 +25,7 @@ screen checkingvariables():
         text "Player pronouns: [u.pronouns]" 
         text "Player favorite flavor: [u.fav_flavor]" 
         text "Player name: [u.name]" 
-        text "Current patient name: [patient_name]"
+        text "Current patient name: [patientName]"
 
 
 # The game starts here.
@@ -40,13 +40,12 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene bg mentor intro
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
 
     label introduction: 
     m.c """Ahh! So much to do to get this place up to snuff!
@@ -166,4 +165,4 @@ label start:
 
         m.c "Let\'s save here, shall we? That was a lot of information!"
 
-        jump clinic
+        jump startHome

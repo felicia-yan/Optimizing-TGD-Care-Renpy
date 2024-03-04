@@ -63,7 +63,7 @@ define gui.text_font = "SourceSans3.ttf"
 define gui.name_text_font = "Gilbert.otf"
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = "SourceSans3.ttf"
+define gui.interface_text_font = "Gilbert.otf"
 
 ## The size of normal dialogue text.
 define gui.text_size = 36
@@ -204,13 +204,13 @@ define gui.quick_button_text_selected_color = gui.accent_color
 ##
 ## Choice buttons are used in the in-game menus.
 
-define gui.choice_button_width = 1000
+define gui.choice_button_width = 500
 define gui.choice_button_height = None
 define gui.choice_button_tile = False
 define gui.choice_button_borders = Borders(100, 20, 100, 20)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
-define gui.choice_button_text_xalign = 0.5
+define gui.choice_button_text_xalign = 0.0
 define gui.choice_button_text_idle_color = '#000000'
 define gui.choice_button_text_hover_color = "#FFFFFF"
 define gui.choice_button_text_insensitive_color = '#7070707f'
@@ -287,7 +287,7 @@ define gui.main_menu_text_xalign = 1.0
 define gui.frame_borders = Borders(6, 6, 6, 6)
 
 ## The frame that is used as part of the confirm screen.
-define gui.confirm_frame_borders = Borders(60, 60, 60, 60)
+define gui.confirm_frame_borders = Borders(100, 100, 100, 100)
 
 ## The frame that is used as part of the skip screen.
 define gui.skip_frame_borders = Borders(24, 8, 75, 8)
