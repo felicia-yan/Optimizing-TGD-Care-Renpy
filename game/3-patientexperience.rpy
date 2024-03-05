@@ -58,27 +58,41 @@ screen openPatientFile():
 screen patientStatus(status, statusMessage): 
     style_prefix "statusUI"
     zorder 100
-    frame:
-        xpos 45
-        ypos 45
-        padding (40, 40)
-        background "bg status positive.png"
-        hbox: 
-            xalign 0.5
-            yalign 0.5
-            spacing 20
-            frame: 
-                xalign 0.5
-                yalign 0.5
-                background "bg status name text.png"
-                text "[patientName.upper()]":
-                    font "Gilbert.otf"
-                    color "#FFFFFF"
-            text "[statusMessage!tq]": 
-                color "#00B3E3"
-                text_align 1.0
+    hbox: 
+        xalign 0.5
+        yalign 0.1
+        spacing 20
+        frame: 
+            background Frame("gui/bg status.png")
+            padding (80, 30)
 
-    timer 4 action Hide('patientStatus')
+            hbox: 
+                box_wrap True 
+                xalign 0.5 
+                yalign 0.5 
+                spacing 30
+                text "[patientName.upper()]":
+                    yalign 0.5
+                    font "Gilbert.otf"
+                    color "#000000"
+                    size 45
+
+                if status == "positive": 
+                    text "{b}▲ [statusMessage!tq]{/b}": 
+                        color "#00B3E3"
+                        size 45
+                if status == "neutral": 
+                    text "{b}➖ [statusMessage!tq]{/b}": 
+                        color "#575757"
+                        size 45    
+                if status == "negative":
+                    text "{b}▼ [statusMessage!tq]{/b}": 
+                        color "#DE4A4A"
+                        size 45
+        
+    timer 3.75 action Hide('patientStatus')
+
+
 
 style statusUI_text: 
     size 35
@@ -140,7 +154,7 @@ label startcaseViola:
 
             "Ok response": 
                 $ decisionScores[1] = 5
-                show screen patientStatus("positive", "uncomfortable")
+                show screen patientStatus("neutral", "uncomfortable")
                 v.c "I feel a bit uncomfortable."
 
             "Bad response":
@@ -160,7 +174,7 @@ label startcaseViola:
 
             "Ok response": 
                 $ decisionScores[2] = 5
-                show screen patientStatus("positive", "content")
+                show screen patientStatus("neutral", "content")
                 v.c "This wasn't the best visit, but it was alright."
 
             "Bad response":

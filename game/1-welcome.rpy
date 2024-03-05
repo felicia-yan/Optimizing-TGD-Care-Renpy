@@ -17,6 +17,8 @@ init python:
             self.fav_sport = fav_sport
             self.fav_flavor = fav_flavor
 
+
+
 """
 # just for checking during development process, shows variable values on screen
 screen checkingvariables(): 
@@ -32,7 +34,7 @@ screen checkingvariables():
 
 label start:
 
-    show screen checkingvariables
+    # show screen checkingvariables
     $ m = Person(Character("Mentor", color="#FFFFFF"), "Mentor", 30, "female")
     $ u = Patient(Character("User"), "Student", 30, None, None, None, None, None)
 
