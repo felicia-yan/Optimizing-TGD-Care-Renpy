@@ -17,7 +17,7 @@ init python:
             self.fav_sport = fav_sport
             self.fav_flavor = fav_flavor
 
-
+"""
 # just for checking during development process, shows variable values on screen
 screen checkingvariables(): 
     vbox: 
@@ -26,7 +26,7 @@ screen checkingvariables():
         text "Player favorite flavor: [u.fav_flavor]" 
         text "Player name: [u.name]" 
         text "Current patient name: [patientName]"
-
+"""
 
 # The game starts here.
 

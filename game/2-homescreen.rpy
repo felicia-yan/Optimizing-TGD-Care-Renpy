@@ -34,19 +34,19 @@ screen home():
         xpos 569
         ypos 403
         auto "sprite viola %s.png"
-        action SetVariable("patientName", "viola"), Jump("caseViola")
+        action SetVariable("patientName", "viola"), Jump("startcaseViola")
     # teddy button
     imagebutton:
         xpos 288
         ypos 470
         auto "sprite teddy %s.png"
-        action SetVariable("patientName", "teddy"), Jump("caseTeddy")
+        action SetVariable("patientName", "teddy"), Jump("startcaseTeddy")
     # roc button
     imagebutton:
         xpos 141
         ypos 573
         auto "sprite roc %s.png"
-        action SetVariable("patientName", "roc"), Jump("caseRoc")
+        action SetVariable("patientName", "roc"), Jump("startcaseRoc")
 
 label homeMenu(): 
     show screen menuUI
@@ -76,16 +76,25 @@ screen poster():
 screen awards(): 
     text "Awards" 
 
-label homeComputer: 
+label homeComputer:
+    scene 
     show screen computer
+    "computer opened"
+    return 
 
 label homePoster: 
+    scene
     show screen poster
+    "poster opened"
+    return 
 
 label homeAwards: 
-    show screen 
-"""
+    scene
+    show screen awards 
+    "awards opened"
+    return 
 
+"""
 label startHome: 
     scene bg home screen
     show screen home
@@ -93,5 +102,7 @@ label startHome:
     m.c "home screen!"
 
     m.c "this is the home screen!"
+
+    return 
 
 

@@ -175,6 +175,31 @@ style say_dialogue:
 screen input(prompt):
     style_prefix "input"
 
+    frame: 
+        background Frame("gui/input frame bg.png", tile=gui.frame_tile)
+        xalign 0.5
+        yalign 0.8
+
+        padding (60, 60)
+
+        vbox:
+            spacing 10
+
+            text prompt style "input_prompt"
+            input id "input"
+
+style input_prompt is default
+
+style input_prompt:
+    xalign gui.dialogue_text_xalign
+    properties gui.text_properties("input_prompt")
+
+style input:
+    xalign gui.dialogue_text_xalign
+    xmaximum gui.dialogue_width
+    
+
+"""
     window:
 
         vbox:
@@ -195,7 +220,7 @@ style input_prompt:
 style input:
     xalign gui.dialogue_text_xalign
     xmaximum gui.dialogue_width
-
+"""
 
 ## Choice screen ###############################################################
 ##
@@ -244,19 +269,22 @@ screen quick_menu():
     if quick_menu:
 
         hbox:
+            yoffset -20
+            spacing 40
             style_prefix "quick"
 
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Back") action Rollback()
+            # textbutton _("Back") action Rollback()
             textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
+            # textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+            # textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            # textbutton _("Q.Save") action QuickSave()
+            # textbutton _("Q.Load") action QuickLoad()
+            textbutton _("Preferences") action ShowMenu('preferences')
+            textbutton _("Load") action ShowMenu('load')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -274,6 +302,7 @@ style quick_button:
 
 style quick_button_text:
     properties gui.text_properties("quick_button")
+    size 35
 
 
 ################################################################################
@@ -1218,7 +1247,7 @@ screen confirm(message, yes_action, no_action):
 
             hbox:
                 xalign 0.5
-                spacing 150
+                spacing 40
 
                 textbutton _("Yes") action yes_action
                 textbutton _("No") action no_action
