@@ -4,12 +4,13 @@
 # achievement system to track completion of modules 
 init python: 
     g = Gallery()
-    g.button("goodlistener")
-    g.condition("persistent.unlock_listener")
-    g.button("greatcommunicator")
-    g.condition("persistent.unlock_communicator")
-    g.button("empathetic")
-    g.condition("persistent.unlock_empath")
+    g.button("patient1visit1")
+    g.condition("persistent.finish_patient1visit1")
+    g.button("patient2visit1")
+    g.condition("persistent.finish_patient2visit1")
+    g.button("patient3visit1")
+    g.condition("persistent.finish_patient3visit1")
+
 
 
 screen home(): 
@@ -82,15 +83,17 @@ screen menuUI():
             ypos 55
             action Hide("menuUI"), Jump("startHome")
 
-"""
-screen computer(): 
-screen poster(): 
-"""
+
+# screen computer(): 
+
+#screen poster(): 
+    # add "bg poster.png"
+
 screen awards():
     grid 3 1:  
-        add g.make_button("goodlistener", "goodlistener", xalign=0.5, yalign=0.5)
-        add g.make_button("greatcommunicator", "greatcommunicator", xalign=0.5, yalign=0.5)
-        add g.make_button("empathetic", "empathetic", xalign=0.5, yalign=0.5)
+        add g.make_button("patient1visit1", "patient1visit1", xalign=0.5, yalign=0.5)
+        add g.make_button("patient2visit1", "patient2visit1", xalign=0.5, yalign=0.5)
+        add g.make_button("patient3visit1", "patient3visit1", xalign=0.5, yalign=0.5)
 
 label startHome: 
     scene bg home screen

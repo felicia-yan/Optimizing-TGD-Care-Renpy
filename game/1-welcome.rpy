@@ -159,11 +159,11 @@ label start:
         
         m.c "Before we step inside the clinic, I also want to show you how to save your progress."
 
-        m.c "See that button there? If you select that, you'll open a menu where you can save your progress. Saving means that if you close the game and come back, you can \"Load\" it on the start screen and continue your learning journey."
+        m.c "If you select the \"Save\" button below, you can save your progress. Saving means that if you close the game and come back, you can \"Load\" it on the start screen and continue your learning journey."
 
-        m.c "We'll also encourage you to save throughout your time here, after important events, so keep that in mind!"
+        m.c "We'll also encourage you to save throughout your time here after important events, so keep that in mind!"
 
-        m.c "By the way, in that same menu, you'll see an \"Options\" button. If you select that, you'll be able to adjust accessibility features, as well as things like music and voice over volume."
+        m.c "By the way, in that same menu, you'll see an \"Preferences\" button. If you select that, you'll be able to adjust accessibility features, as well as things like music and voice over volume."
 
         m.c "Let\'s save here, shall we? That was a lot of information!"
 

@@ -5,6 +5,25 @@ default decisionScores = [0, 0, 0]
 default patientFiles = {
     "viola": "This is the text of Viola's medical file",
 }
+
+default violaFile = {
+    # patient ID information
+    "DOB": "04/01/1997", 
+    "Gender": "F", 
+    "Address": "123 Pine Street Ln", 
+
+    # medical history 
+    "Chronic conditions": "Asthma",
+    "Previous surgeries": "Appendix removal", 
+    "Family medical history": "Hypertension - Father, type 2 diabetes - Mother", 
+
+    # medication list
+    "Medication list": "Ibuprofen, 400mg, 2x a day", 
+
+    # consultation notes
+    "Consultation notes": "These are notes from doctors and specialists regarding Viola's consultations."
+
+}
 default patientName = None
 default patientNames = list(patientFiles.keys())
 
@@ -15,44 +34,124 @@ screen clipboard():
         xalign 0.05
         yalign 0.05
         auto "files clipboard %s.png"
-        action Call("allMedicalFiles"), Hide("clipboard")
+        action Show("allMedicalFiles"), Hide("clipboard")
 
 # show all patient folders to choose from 
 screen allMedicalFiles(): 
+    modal True
+    add "bg medicalfiles.png"
     grid 3 2: 
         xalign 0.5
         yalign 0.5
         spacing 60
         imagebutton: 
             auto "files folder %s.png"
-            action Call("openPatientFile"), Hide("allMedicalFiles")
+            action Show("openPatientFile"), Hide("allMedicalFiles")
         imagebutton: 
             auto "files folder %s.png"
-            action Call("openPatientFile"), Hide("allMedicalFiles")
+            action Show("openPatientFile"), Hide("allMedicalFiles")
         imagebutton: 
             auto "files folder %s.png"
-            action Call("openPatientFile"), Hide("allMedicalFiles")
+            action Show("openPatientFile"), Hide("allMedicalFiles")
         imagebutton: 
             auto "files folder %s.png"
-            action Call("openPatientFile"), Hide("allMedicalFiles")
+            action Show("openPatientFile"), Hide("allMedicalFiles")
         imagebutton: 
             auto "files folder %s.png"
-            action Call("openPatientFile"), Hide("allMedicalFiles")
+            action Show("openPatientFile"), Hide("allMedicalFiles")
     
 
 # show medical info for patient selected
 screen openPatientFile():
-    imagebutton: 
-        xalign 0.02
-        yalign 0.05
-        auto "ui button x %s.png"
+    modal True
+    add "bg medicalfiles.png"
+    # exit button
+    textbutton "Exit": 
+        xpos 1762
+        ypos 55
         action Hide("openPatientFile"), Show("clipboard")
+
+    # scrollable viewport for medical information
+    side "c": 
+        area (300, 200, 1550, 860)
+
+        viewport id "vp": 
+            draggable True
+            arrowkeys True
+            mousewheel True
+            scrollbars "vertical"
+            xsize 1350
+            ysize 700
+
+            vbox: 
+                text "Patient name: [patientName.title()]":
+                    font "Gilbert.otf"
+                    color "#00B3E3"
+                    size 45
+                text "Patient Identification Information":
+                    font "Gilbert.otf"
+                    size 40
+                frame: 
+                    background "#EEEEEE"
+                    padding (50, 50)
+                    xfill True
+                    vbox: 
+                        text "{b}DOB:{/b} [violaFile['DOB']]"
+                        text "{b}Gender:{/b} [violaFile['Gender']]"
+                        text "{b}Address:{/b} [violaFile['Address']]"
+
+                text "Medical History":
+                    font "Gilbert.otf"
+                    size 40
+                frame: 
+                    background "#EEEEEE"
+                    padding (50, 50)
+                    xfill True
+                    vbox: 
+                        text "{b}Chronic conditions:{/b} [violaFile['Chronic conditions']]"
+                        text "{b}Previous surgeries:{/b} [violaFile['Previous surgeries']]"
+                        text "{b}Family medical history:{/b} [violaFile['Family medical history']]"
+
+                text "Medication list:":
+                    font "Gilbert.otf"
+                    size 40
+                frame:
+                    background "#EEEEEE"
+                    padding (50, 50)
+                    xfill True
+                    vbox: 
+                        text "[violaFile['Medication list']]"
+
+                text "Consultation notes:":
+                    font "Gilbert.otf"
+                    size 40
+                frame: 
+                    background "#EEEEEE"
+                    padding (50, 50)
+                    xfill True
+                    vbox: 
+                        text "[violaFile['Consultation notes']]"
+
+
+'''
     frame:
         xalign 0.5
         yalign 0.5
-        xpadding 40
-        ypadding 40
-        text "[patientFiles[patientName]]"
+        xsize 1400
+        hbox: 
+            add "ui medicalfiles name bg.png"
+            text "Patient name: [patientName.title()]"
+
+        vbox: 
+            text "DOB: [violaFile['DOB']]"
+            text "Gender: [violaFile['Gender']]"
+            text "Address: [violaFile['Address']]"
+            text "Chronic conditions: [violaFile['Chronic conditions']]"
+            text "Previous surgeries: [violaFile['Previous surgeries']]"
+            text "Family medical history: [violaFile['Family medical history']]"
+            text "Medication list: [violaFile['Medication list']]"
+            text "Consultation notes: [violaFile['Consultation notes']]"
+'''
 
 # alerts for status of relationship with patient
 screen patientStatus(status, statusMessage): 
@@ -97,7 +196,7 @@ screen patientStatus(status, statusMessage):
 style statusUI_text: 
     size 35
 
-    
+
 transform notify_appear:
     on show:
         alpha 0
