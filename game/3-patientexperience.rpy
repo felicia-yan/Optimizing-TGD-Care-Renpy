@@ -2,12 +2,9 @@
 
 # use list to keep track of decisions made by user in patient interaction
 default decisionScores = [0, 0, 0]
-default patientFiles = {
-    "viola": "This is the text of Viola's medical file",
-}
-
 default violaFile = {
     # patient ID information
+    "PatientName": "Viola Phoenix",
     "DOB": "04/01/1997", 
     "Gender": "F", 
     "Address": "123 Pine Street Ln", 
@@ -25,7 +22,6 @@ default violaFile = {
 
 }
 default patientName = None
-default patientNames = list(patientFiles.keys())
 
 # ui screens for patient interaction
 # clipboard button in upper left for opening files
@@ -84,9 +80,8 @@ screen openPatientFile():
             ysize 700
 
             vbox: 
-                text "Patient name: [patientName.title()]":
+                text "Patient name: {color=#00B3E3}[violaFile['PatientName']]{/color}":
                     font "Gilbert.otf"
-                    color "#00B3E3"
                     size 45
                 text "Patient Identification Information":
                     font "Gilbert.otf"
@@ -156,7 +151,6 @@ screen openPatientFile():
 # alerts for status of relationship with patient
 screen patientStatus(status, statusMessage): 
     style_prefix "statusUI"
-    zorder 100
     hbox: 
         xalign 0.5
         yalign 0.1

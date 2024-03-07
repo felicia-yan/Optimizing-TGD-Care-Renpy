@@ -1,46 +1,29 @@
 # Clinic Home Screen
 
-
-# achievement system to track completion of modules 
-init python: 
-    g = Gallery()
-    g.button("patient1visit1")
-    g.condition("persistent.finish_patient1visit1")
-    g.button("patient2visit1")
-    g.condition("persistent.finish_patient2visit1")
-    g.button("patient3visit1")
-    g.condition("persistent.finish_patient3visit1")
-
-
-
 screen home(): 
     # menu button
     textbutton "Menu": 
-        xpos 1762
+        xpos 1780
         ypos 55
-        action Jump("homeMenu")
-    
+        action Show("menuUI"), Hide("home")
     # computer
     imagebutton:
         xpos 1165
         ypos 395
         auto "button computer %s.png"
         action Show("computer")
-
     # poster
     imagebutton: 
         xpos 1600
         ypos 100
         auto "button poster %s.png"
         action Show("poster")
-
     # awards shelf
     imagebutton: 
         xpos 500
         ypos 100
         auto "button shelf %s.png"
         action Show("awards")
-    
     # clickable patient sprites for waiting room 
     # viola button
     imagebutton:
@@ -61,48 +44,120 @@ screen home():
         auto "sprite roc %s.png"
         action SetVariable("patientName", "roc"), Jump("startcaseRoc")
 
-label homeMenu(): 
-    show screen menuUI
-    menu: 
-        "Save Game": 
-            pass
-        "Load Game": 
-            pass
-        "Options": 
-            pass 
-        "Exit to Title Screen": 
-            $ MainMenu(confirm=False)()
 
 screen menuUI(): 
+    modal True
     frame: 
+        background "bg lighten overlay.png"
         xalign 0.5
         yalign 0.5
         add "bg home menu.png"
         textbutton "Exit": 
-            xpos 1762
+            xpos 1780
             ypos 55
             action Hide("menuUI"), Jump("startHome")
+        vbox: 
+            style_prefix "choice"
+            yalign 0.7
+            textbutton _("Save Game") action ShowMenu('save')
+            textbutton _("Load Game") action ShowMenu('load')
+            textbutton _("Preferences") action ShowMenu('preferences')
+            textbutton _("Exit to Title Screen") action MainMenu()
 
 
-# screen computer(): 
 
-#screen poster(): 
-    # add "bg poster.png"
+screen computer(): 
+    modal True
+    add "bg medicalfiles.png"
+    textbutton "Exit": 
+            xpos 1780
+            ypos 55
+            action Hide("computer")
+    frame: 
+        xalign 0.5
+        yalign 0.5
+        background None
+        text "{b}Patient Records{/b}\n Select the patient whose record you would like to view.":
+            size 45
+            xalign 0.5
+            yalign 0.25
+            textalign 0.5
+    # buttons for each patient to see patient records
+        hbox: 
+            style_prefix "profiles"
+            xalign 0.5
+            yalign 0.7
+            spacing 100
+            vbox: 
+                imagebutton: 
+                    auto "profiles viola %s.png"
+                    action Hide("computer")
+                text "Viola Phoenix"
+            vbox: 
+                imagebutton: 
+                    auto "profiles roc %s.png"
+                    action Hide("computer")
+                text "Roc Garcia"
+            vbox: 
+                imagebutton: 
+                    auto "profiles teddy %s.png"
+                    action Hide("computer")
+                text "Teddy Williams"
+
+style profiles_text: 
+    xalign 0.5
+    font "Gilbert.otf"
+
+screen poster(): 
+    modal True
+    add "bg poster.png"
+    textbutton "Exit": 
+            xpos 1780
+            ypos 55
+            action Hide("poster")
+    frame: 
+        text "Progress Roadmap": 
+            xpos 250
+            ypos 210
+            font "Gilbert.otf"
+            size 50
+        background None
+        # buttons for each module 
+        imagebutton: 
+            xpos 270
+            ypos 320
+            auto "bg unlocked module %s.png"
+            action Hide("poster")
+        imagebutton: 
+            xpos 470
+            ypos 310
+            auto "bg unlocked module %s.png"
+            action Hide("poster")
+        imagebutton: 
+            xpos 670
+            ypos 310
+            auto "bg current module %s.png"
+            action Hide("poster")
+        imagebutton: 
+            xpos 870
+            ypos 260
+            auto "bg locked module %s.png"
+
 
 screen awards():
-    grid 3 1:  
-        add g.make_button("patient1visit1", "patient1visit1", xalign=0.5, yalign=0.5)
-        add g.make_button("patient2visit1", "patient2visit1", xalign=0.5, yalign=0.5)
-        add g.make_button("patient3visit1", "patient3visit1", xalign=0.5, yalign=0.5)
+    modal True
+    add "bg awards.png"
+    textbutton "Exit": 
+            xpos 1780
+            ypos 55
+            action Hide("awards")
 
 label startHome: 
     scene bg home screen
     show screen home
 
-    m.c "home screen!"
+    m.c "This is the home screen!"
 
-    m.c "this is the home screen!"
-
-    return 
+    m.c "This is where you will find your patients, begin patient visits, and review your progress." 
 
 
