@@ -24,3 +24,5 @@ game/audio
 game/images
 game/cache
 game/saves
+game/gui
+game/tl
