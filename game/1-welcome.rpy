@@ -1,6 +1,13 @@
 # Introduction
-
 init python: 
+    # allow player to make new line in notepad by pressing enter/return
+    config.keymap['input_next_line'].append('K_RETURN')
+    config.has_autosave = True
+    config.autosave_on_choice = True
+    config.autosave_on_input = True
+    config.autosave_on_quit = True
+    config.allow_skipping = False
+
     # player classes 
     class Person:
         def __init__(self, character, name, age, sex):
@@ -17,9 +24,95 @@ init python:
             self.fav_sport = fav_sport
             self.fav_flavor = fav_flavor
 
+# use list to keep track of decisions made by user in patient interaction
+default notes = ""
+default decisionScores = [0, 0, 0]
+default violaFile = {
+    # patient ID information
+    "Full name": "Viola Phoenix",
+    "Legal name": "Vincent Andrews",
+    "Pronouns": "she/her",
+    "DOB": "October 20, 1996", 
+    "Gender": "Female", 
+    "Sex at birth": "Male", 
+    "Address": "Los Angeles, CA", 
+    "Race": "Black",
+
+    # medical history 
+    "Chronic conditions": "Hypertension. High cholesterol.",
+    "Previous surgeries": "Top surgery. Facial feminization.", 
+    "Additional information": "Smoker. Active sex life, practices safe sex. Came out as transgender 6 years ago. Previously lived as a gay man. Has been receiving gender-affirming care for 6 years.", 
+
+    # medication list
+    "Medication list": "Estrogen (estradiol)", 
+
+    # consultation notes
+    "Consultation notes": "Wants to increase dosage of estradiol for feminizing effects."
+}
+default rocFile = {
+    # patient ID information
+    "Full name": "Roc Garcia",
+    "Legal name": "Andrea Garcia",
+    "Pronouns": "he/him",
+    "DOB": "June 10, 1988", 
+    "Gender": "Male", 
+    "Sex at birth": "Female", 
+    "Address": "San Diego, CA", 
+    "Race": "Hispanic or Latino",
+
+    # medical history 
+    "Chronic conditions": "Asthma.",
+    "Previous surgeries": "None", 
+    "Additional information": "Active sex life.", 
+
+    # medication list
+    "Medication list": "None", 
+
+    # consultation notes
+    "Consultation notes": "Would like to explore taking hormones and the process to affirm his gender."
+}
+default teddyFile = {
+    # patient ID information
+    "Full name": "Teddy Williams",
+    "Legal name": "Theodore Williams",
+    "Pronouns": "they/them",
+    "DOB": "October 20, 1996", 
+    "Gender": "Nonbinary", 
+    "Sex at birth": "Female", 
+    "Address": "Palo Alto, CA", 
+    "Race": "White",
+
+    # medical history 
+    "Chronic conditions": "None",
+    "Previous surgeries": "Appendectomy.", 
+    "Additional information": "Family history of heart disease — mother, aunt, brother.",
+
+    # medication list
+    "Medication list": "Testosterone", 
+
+    # consultation notes
+    "Consultation notes": "Wants to increase dosage of testosterone for masculinizing effects."
+}
+default display_desc = ""
+default glossarySearchTerm = ""
+default glossaryTerms = {
+    "Adrenaline": "Stress hormone that puts the body on high alert. Changes include faster heartbeat, more rapid breathing, greater energy, and higher blood pressure. Also called epinephrine.", 
+    "Androgen": "Any of a group of male sex hormones, including testosterone, that controls male characteristics such as beard growth.", 
+    "Defibrillation": "The delivery of an electric shock to the heart to stop an abnormal rhythm and restore a normal heartbeat.", 
+    "Defibrillator": "A device that delivers an electric shock to the heart to restore normal rhythm. Used to treat cardiac arrest and other dangerous heart rhythm problems.", 
+    "Estradiol": "The primary form of the sex hormone estrogen produced by women.", 
+    "Estrogen": "The main sex hormone in women.", 
+    "Gender dysphoria": "Distress experienced by some people whose gender identity and sex assigned at birth don’t match.", 
+    "Gestational diabetes mellitus": "A form of diabetes that appears during pregnancy.",
+    "Intersex": "A group of congenital conditions in which the reproductive organs, genitals, and/or other sexual anatomy do not develop according to traditional expectations for females or males.",
+    "Transition": "The process of aligning gender expression with gender identity. "
+
+}
+
+default patientName = None
 
 
-"""
+
 # just for checking during development process, shows variable values on screen
 screen checkingvariables(): 
     vbox: 
@@ -28,13 +121,18 @@ screen checkingvariables():
         text "Player favorite flavor: [u.fav_flavor]" 
         text "Player name: [u.name]" 
         text "Current patient name: [patientName]"
-"""
+        text "awardsUnlocked: [awardsUnlocked]"
+        text "searchName: [searchName]"
+        text "Notes: [notes]"
+        text "decisionScores: [decisionScores]"
+        text "patientName: [patientName]"
+
 
 # The game starts here.
 
 label start:
 
-    # show screen checkingvariables
+    show screen checkingvariables
     $ m = Person(Character("Mentor", color="#FFFFFF"), "Mentor", 30, "female")
     $ u = Patient(Character("User"), "Student", 30, None, None, None, None, None)
 
@@ -84,7 +182,7 @@ label start:
         $ u.name = u.name.strip().title()
         if u.name == "": 
             jump give_name
-        m.c "Got it! I'm so forgetful sometimes."
+        m.c "Got it, [u.name]! I'm so forgetful sometimes."
         jump select_pronouns
 
 

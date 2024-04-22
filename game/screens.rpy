@@ -994,8 +994,8 @@ screen history():
 
                         ## Take the color of the who text from the Character, if
                         ## set.
-                        if "color" in h.who_args:
-                            text_color h.who_args["color"]
+                        ##cif "color" in h.who_args:
+                        ##    text_color h.who_args["color"]
 
                 $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
                 text what:
