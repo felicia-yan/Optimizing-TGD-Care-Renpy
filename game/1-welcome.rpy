@@ -11,7 +11,7 @@ init python:
     # player classes 
     class Person:
         def __init__(self, character, name, age, sex):
-            self.c = character
+            self.char = character
             self.name = name
             self.age = age 
             self.sex = sex
@@ -116,10 +116,10 @@ default patientName = None
 # just for checking during development process, shows variable values on screen
 screen checkingvariables(): 
     vbox: 
-        text "Player name: [u.name]" 
-        text "Player pronouns: [u.pronouns]" 
-        text "Player favorite flavor: [u.fav_flavor]" 
-        text "Player name: [u.name]" 
+        text "Player name: [player.name]" 
+        text "Player pronouns: [player.pronouns]" 
+        text "Player favorite flavor: [player.fav_flavor]" 
+        text "Player name: [player.name]" 
         text "Current patient name: [patientName]"
         text "awardsUnlocked: [awardsUnlocked]"
         text "searchName: [searchName]"
@@ -133,8 +133,8 @@ screen checkingvariables():
 label start:
 
     show screen checkingvariables
-    $ m = Person(Character("Mentor", color="#FFFFFF"), "Mentor", 30, "female")
-    $ u = Patient(Character("User"), "Student", 30, None, None, None, None, None)
+    $ mentor = Person(Character("Mentor", color="#FFFFFF"), "Mentor", 30, "female")
+    $ player = Patient(Character("Player"), "Student", 30, None, None, None, None, None)
 
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
@@ -148,7 +148,7 @@ label start:
 
 
     label introduction: 
-    m.c """Ahh! So much to do to get this place up to snuff!
+    mentor.char """Ahh! So much to do to get this place up to snuff!
 
     ...Oh! How funny, I was just talking to myself! You must be our new recruit!
 
@@ -178,91 +178,91 @@ label start:
 
 
     label give_name: 
-        $ u.name = renpy.input("What's your name?")
-        $ u.name = u.name.strip().title()
-        if u.name == "": 
+        $ player.name = renpy.input("What's your name?")
+        $ player.name = player.name.strip().title()
+        if player.name == "": 
             jump give_name
-        m.c "Got it, [u.name]! I'm so forgetful sometimes."
+        mentor.char "Got it, [player.name]! I'm so forgetful sometimes."
         jump select_pronouns
 
 
     label default_name: 
-        $ u.name = "Student"
-        m.c "Mysterious! Not to worry, I'll respect your privacy."
+        $ player.name = "Student"
+        mentor.char "Mysterious! Not to worry, I'll respect your privacy."
         jump select_pronouns
 
     
     label select_pronouns: 
-    m.c "And could you remind me of the pronouns you use?"
+    mentor.char "And could you remind me of the pronouns you use?"
 
     # pronoun selection here; look into tools 
     menu:
         "He/him":
-                $ u.pronouns = "he/him"
+                $ player.pronouns = "he/him"
         "She/her":
-                $ u.pronouns = "she/her"
+                $ player.pronouns = "she/her"
         "They/them":
-                $ u.pronouns = "they/them"
+                $ player.pronouns = "they/them"
         "Just my name please":
-                $ u.pronouns = "name"
+                $ player.pronouns = "name"
         "No preference":
-                $ u.pronouns = "any"
+                $ player.pronouns = "any"
            
-    m.c "Thank you, duly noted. We'll remember this when addressing you!"
+    mentor.char "Thank you, duly noted. We'll remember this when addressing you!"
 
-    m.c "Oh, one last super important question!"
+    mentor.char "Oh, one last super important question!"
 
-    m.c "What's your favorite flavor of ice cream? We have a little ice cream party every now and then!"
+    mentor.char "What's your favorite flavor of ice cream? We have a little ice cream party every now and then!"
 
     menu: 
         "Vanilla":
-            $ u.fav_flavor = "vanilla"
+            $ player.fav_flavor = "vanilla"
             jump icecream1
 
         "Chocolate":
-            $ u.fav_flavor = "chocolate"
+            $ player.fav_flavor = "chocolate"
             jump icecream1
 
         "Strawberry":
-            $ u.fav_flavor = "strawberry"
+            $ player.fav_flavor = "strawberry"
             jump icecream2
 
         "Pistachio":
-            $ u.fav_flavor = "pistachio"
+            $ player.fav_flavor = "pistachio"
             jump icecream2
         
         "Other":
             jump give_flavor
     
     label give_flavor: 
-        $ u.fav_flavor = renpy.input("What's your favorite flavor?")
-        $ u.fav_flavor = u.fav_flavor.strip().lower() 
-        if u.fav_flavor == "": 
+        $ player.fav_flavor = renpy.input("What's your favorite flavor?")
+        $ player.fav_flavor = player.fav_flavor.strip().lower() 
+        if player.fav_flavor == "": 
             jump give_flavor
-        m.c "{i}Flavor, Flavor, Flavor!{/i} If I say it three times quick I'll remember it!" 
+        mentor.char "{i}Flavor, Flavor, Flavor!{/i} If I say it three times quick I'll remember it!" 
         jump tutorial
 
     label icecream1: 
-        m.c "A classic choice. Thanks!"
+        mentor.char "A classic choice. Thanks!"
         jump tutorial
     
     label icecream2: 
-        m.c "Cool! I swear, I will remember that!"
+        mentor.char "Cool! I swear, I will remember that!"
         jump tutorial
     
     label tutorial: 
-        m.c "Now, let me show you around. We've got a lot of work to do!"
+        mentor.char "Now, let me show you around. We've got a lot of work to do!"
        
-        m.c "So, you're already familiar with the choice menu. As you spend more time at the clinic, you'll be making a lot of choices, mainly about how to respond to people. We'll try not to wear you out with too many choices though!"
+        mentor.char "So, you're already familiar with the choice menplayer. As you spend more time at the clinic, you'll be making a lot of choices, mainly about how to respond to people. We'll try not to wear you out with too many choices though!"
         
-        m.c "Before we step inside the clinic, I also want to show you how to save your progress."
+        mentor.char "Before we step inside the clinic, I also want to show you how to save your progress."
 
-        m.c "If you select the \"Save\" button below, you can save your progress. Saving means that if you close the game and come back, you can \"Load\" it on the start screen and continue your learning journey."
+        mentor.char "If you select the \"Save\" button below, you can save your progress. Saving means that if you close the game and come back, you can \"Load\" it on the start screen and continue your learning journey."
 
-        m.c "We'll also encourage you to save throughout your time here after important events, so keep that in mind!"
+        mentor.char "We'll also encourage you to save throughout your time here after important events, so keep that in mind!"
 
-        m.c "By the way, in that same menu, you'll see an \"Preferences\" button. If you select that, you'll be able to adjust accessibility features, as well as things like music and voice over volume."
+        mentor.char "By the way, in that same menu, you'll see an \"Preferences\" button. If you select that, you'll be able to adjust accessibility features, as well as things like music and voice over volume."
 
-        m.c "Let\'s save here, shall we? That was a lot of information!"
+        mentor.char "Let\'s save here, shall we? That was a lot of information!"
 
         jump startHome

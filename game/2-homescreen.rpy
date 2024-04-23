@@ -330,11 +330,11 @@ screen badges():
             xalign 0.03
             yalign 0.25
             xmaximum 350
-            text "[u.name]": 
+            text "[player.name]": 
                 font "Gilbert.otf"
                 line_spacing -20
                 size 50
-            text "{b}Pronouns:{/b} [u.pronouns]": 
+            text "{b}Pronouns:{/b} [player.pronouns]": 
                 font "SourceSans3.ttf"
                 size 36
         draggroup: 
@@ -364,7 +364,7 @@ label startHome:
     scene bg home screen
     show screen home
 
-    m.c "This is the home screen!"
+    mentor.char "This is the home screen!"
 
-    m.c "This is where you will find your patients, begin patient visits, and review your progress." 
+    mentor.char "This is where you will find your patients, begin patient visits, and review your progress." 
     return

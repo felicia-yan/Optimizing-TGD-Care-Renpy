@@ -479,95 +479,95 @@ label startcaseViola:
         show screen lookup
         $ searchName = patientName
 
-        $ v = Patient(Character("Viola", color="#FFFFFF"), "Viola", 24, "female", "she/her", "pink", "swimming", "vanilla")
+        $ viola = Patient(Character("Viola", color="#FFFFFF"), "Viola", 24, "female", "she/her", "pink", "swimming", "vanilla")
 
-        m.c "You've started Viola's case!"
+        mentor.char "You've started Viola's case!"
 
-        m.c "The patient's name is [v.name], age is [v.age], and pronouns are [v.pronouns]."
+        mentor.char "The patient's name is [viola.name], age is [viola.age], and pronouns are [viola.pronouns]."
 
-        v.c "Hi! I'm Viola!"
+        viola.char "Hi! I'm Viola!"
 
-        m.c "To get started, you'll want to review her medical file."
+        mentor.char "To get started, you'll want to review her medical file."
 
-        m.c "Click on the clipboard to see all the files you have on hand, and select the one for your patient, Viola."
+        mentor.char "Click on the clipboard to see all the files you have on hand, and select the one for your patient, Viola."
 
         menu: 
             "Great response": 
                 $ decisionScores[0] = 10
                 show screen patientStatus("positive", "trusting")
-                v.c "Thanks! I feel supported and I trust you more."
+                viola.char "Thanks! I feel supported and I trust you more."
 
             "Ok response": 
                 $ decisionScores[0] = 5
                 show screen patientStatus("positive", "trusting")
-                v.c "I guess that's ok."
+                viola.char "I guess that's ok."
 
             "Bad response":
                 $ decisionScores[0] = 1
                 show screen patientStatus("negative", "distrusting")
-                v.c "That was not a good choice. I don't feel good about what you said to me."
+                viola.char "That was not a good choice. I don't feel good about what you said to me."
 
 
         label caseViolacontinue1: 
-            m.c "You'll be presented with 2 more decisions to make for this patient interaction."
+            mentor.char "You'll be presented with 2 more decisions to make for this patient interaction."
 
         menu: 
             "Great response": 
                 $ decisionScores[1] = 10
                 show screen patientStatus("positive", "comfort")
-                v.c "I feel more comfortable with you as my physician."
+                viola.char "I feel more comfortable with you as my physician."
 
             "Ok response": 
                 $ decisionScores[1] = 5
                 show screen patientStatus("neutral", "uncomfortable")
-                v.c "I feel a bit uncomfortable."
+                viola.char "I feel a bit uncomfortable."
 
             "Bad response":
                 $ decisionScores[1] = 1
                 show screen patientStatus("negative", "embarrassed")
-                v.c "I feel embarrassed and very uncomfortable."
+                viola.char "I feel embarrassed and very uncomfortable."
             
 
         label caseViolacontinue2: 
-        m.c "This is the last choice in this section."
+        mentor.char "This is the last choice in this section."
     
         menu: 
             "Great response": 
                 $ decisionScores[2] = 10
                 show screen patientStatus("positive", "happy")
-                v.c "I feel very good about the outcome of this visit."
+                viola.char "I feel very good about the outcome of this visit."
 
             "Ok response": 
                 $ decisionScores[2] = 5
                 show screen patientStatus("neutral", "content")
-                v.c "This wasn't the best visit, but it was alright."
+                viola.char "This wasn't the best visit, but it was alright."
 
             "Bad response":
                 $ decisionScores[2] = 1
                 show screen patientStatus("negative", "angry")
-                v.c "This was a horrible visit. I won't be back."
+                viola.char "This was a horrible visit. I won't be back."
 
 
         label learner_debrief: 
-            m.c "The patient visit is over." 
+            mentor.char "The patient visit is over." 
             show screen scorecard
             if decisionScores[0] == 10: 
-                m.c "You used the correct pronouns for Viola, gaining her trust."
+                mentor.char "You used the correct pronouns for Viola, gaining her trust."
 
-                m.c "You were a caring and empathetic listener."
+                mentor.char "You were a caring and empathetic listener."
 
             
             if decisionScores[0] == 5: 
-                m.c "You addressed Viola as she asked to be addressed, though you seemed hesitant."
+                mentor.char "You addressed Viola as she asked to be addressed, though you seemed hesitant."
             if decisionScores[0] == 1: 
-                m.c "You started the interaction by misgendering Viola, losing her trust."
+                mentor.char "You started the interaction by misgendering Viola, losing her trust."
             
             if decisionScores.count(10) == 3:
-                m.c "Great job! You made choices that optimized Viola's gender-affirming care."
+                mentor.char "Great job! You made choices that optimized Viola's gender-affirming care."
             if decisionScores.count(10) == 2:
-                m.c "Overall, the patient interaction was mostly good, with some inappropriate choices."
+                mentor.char "Overall, the patient interaction was mostly good, with some inappropriate choices."
             if decisionScores.count(10) == 1:
-                m.c "Unfortunately, the quality of care for Viola was not adequate. She was uncomfortable and felt unsupported."
+                mentor.char "Unfortunately, the quality of care for Viola was not adequate. She was uncomfortable and felt unsupported."
             
             hide screen scorecard
             call screen getAward(0)
@@ -582,69 +582,69 @@ label violaPreVisit1:
     $ s2 = Person(Character("Staff 2", color="#FFFFFF"), "Staff 2", 30, "female") 
 
     
-    u.c "What's going on? Did something happen?"
+    player.char "What's going on? Did something happen?"
 
-    s1.c "You won't believe this. THE Viola Phoenix is coming in today."
+    s1.char "You won't believe this. THE Viola Phoenix is coming in today."
 
-    u.c "Viola Phoenix?"
+    player.char "Viola Phoenix?"
 
-    s1.c "You don't know her? She's all over the news. Look at this: 'Viola Phoenix—a trans filmmaker whose controversial film was banned from film festivals.'"
+    s1.char "You don't know her? She's all over the news. Look at this: 'Viola Phoenix—a trans filmmaker whose controversial film was banned from film festivals.'"
 
-    s2.c "Yep, I follow her on Instagram. She's been blowing up on social media lately."
+    s2.char "Yep, I follow her on Instagram. She's been blowing up on social media lately."
 
-    s1.c "Have you seen her vlogs? They're some of the best on Youtube. No wonder she's making it big."
+    s1.char "Have you seen her vlogs? They're some of the best on Youtube. No wonder she's making it big."
 
-    s2.c "Yeah, I can't believe she's coming here."
+    s2.char "Yeah, I can't believe she's coming here."
 
-    s1.c "This could totally 'make or break' our reputation. What if we show up in one of her vlogs?"
+    s1.char "This could totally 'make or break' our reputation. What if we show up in one of her vlogs?"
 
-    s2.c "That would be so cool."
+    s2.char "That would be so cool."
 
 
 
-    m.c "Let's look over Viola's case before her visit." 
+    mentor.char "Let's look over Viola's case before her visit." 
     
-    m.c "Click on the clipboard to see all the files you have on hand, and select the one for your patient, Viola."
+    mentor.char "Click on the clipboard to see all the files you have on hand, and select the one for your patient, Viola."
 
-    m.c "When you're ready, let's review some of the important information. You can and should always refer back to her file if you don't remember."
+    mentor.char "When you're ready, let's review some of the important information. You can and should always refer back to her file if you don't remember."
 
     label whatMedication:
-    m.c "What medication is Viola currently taking that is relevant to her gender-affirming care?"
+    mentor.char "What medication is Viola currently taking that is relevant to her gender-affirming care?"
  
     menu: 
         "Estradiol": 
-            m.c "Yes, exactly!" 
+            mentor.char "Yes, exactly!" 
 
             label whatIsEstradiol:
-            m.c "What hormone is estradiol?" 
+            mentor.char "What hormone is estradiol?" 
 
             menu:
                 "Insulin": 
-                    m.c "Not quite."
+                    mentor.char "Not quite."
                     jump whatIsEstradiol
                 "Testosterone": 
-                    m.c "Almost! Testestorone is actually the corresponding male sex hormone."
+                    mentor.char "Almost! Testestorone is actually the corresponding male sex hormone."
                     jump whatIsEstradiol
                 "Progesterone": 
-                    m.c "Good guess, but not exactly!"
+                    mentor.char "Good guess, but not exactly!"
                     jump whatIsEstradiol
                 "Estrogen":  
-                    m.c "Indeed! Estradiol is the form of estrogen primarily produced by ovaries."
+                    mentor.char "Indeed! Estradiol is the form of estrogen primarily produced by ovaries."
             
         "Cyproterone": 
-            m.c "Not quite. Cyproterone is an anti-androgen, but Viola isn't currently taking one."
+            mentor.char "Not quite. Cyproterone is an anti-androgen, but Viola isn't currently taking one."
             jump whatMedication
 
         "Testosterone": 
-            m.c "No, for gender-affirming care, testosterone is mostly used by transmen for its masculinizing effects. Viola is a transwoman."
+            mentor.char "No, for gender-affirming care, testosterone is mostly used by transmen for its masculinizing effects. Viola is a transwoman."
             jump whatMedication
 
         "Spironolactone": 
-            m.c "Not exactly. While spironolactone is an anti-androgen commonly used by transwomen, Viola is not currently on it."
+            mentor.char "Not exactly. While spironolactone is an anti-androgen commonly used by transwomen, Viola is not currently on it."
             jump whatMedication
 
-    m.c "Great job!" 
+    mentor.char "Great job!" 
     
-    m.c "Something that stands out to me is that Viola is currently not on an anti-androgen."
+    mentor.char "Something that stands out to me is that Viola is currently not on an anti-androgen."
 
     return 
