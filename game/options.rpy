@@ -151,6 +151,7 @@ define config.save_directory = "TGDPrototype-1708300808"
 ## The icon displayed on the taskbar or dock.
 
 define config.window_icon = "gui/window_icon.png"
+define analytics.tracking_id = "G-XVT6G5KPCZ"
 
 
 ## Build configuration #########################################################
@@ -207,3 +208,4 @@ init python:
 ## by a slash.
 
 # define build.itch_project = "renpytom/test-project"
+

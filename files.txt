@@ -1,23 +1,215 @@
+ good button idle.png
 .DS_Store
+0-setup.rpy
+0-setup.rpyc
 1-welcome.rpy
 1-welcome.rpyc
 2-homescreen.rpy
 2-homescreen.rpyc
 3-patientexperience.rpy
 3-patientexperience.rpyc
+4-Viola-patient-visit-1.rpy
+4-Viola-patient-visit-1.rpyc
 Gilbert.otf
 SourceSans3.ttf
+analytics.rpy
+analytics.rpyc
+bad choice button hover.png
+bad choice button idle.png
+bad choice button selected.png
+bg blank.png
+bg darken blur overlay.png
+bg debrief.png
+bg roadmap.png
+good choice button hover.png
+good choice button selected.png
 gui.rpy
 gui.rpyc
 options.rpy
 options.rpyc
+score button.png
 screens.rpy
 screens.rpyc
+template.rpy
+template.rpyc
+tooltip.png
+vo clips/.DS_Store
+vo clips/misc/.DS_Store
+vo clips/misc/misc_001.ogg
+vo clips/misc/misc_002.ogg
+vo clips/misc/misc_003.ogg
+vo clips/misc/misc_004.ogg
+vo clips/misc/misc_005.ogg
+vo clips/misc/misc_006.ogg
+vo clips/misc/misc_007.ogg
+vo clips/misc/misc_008.ogg
+vo clips/misc/misc_009.ogg
+vo clips/misc/misc_010.ogg
+vo clips/misc/misc_011.ogg
+vo clips/misc/misc_012.ogg
+vo clips/misc/misc_013.ogg
+vo clips/misc/misc_014.ogg
+vo clips/misc/misc_015.ogg
+vo clips/misc/misc_016.ogg
+vo clips/misc/misc_017.ogg
+vo clips/misc/misc_018.ogg
+vo clips/misc/misc_019.ogg
+vo clips/misc/misc_020.ogg
+vo clips/misc/misc_021.ogg
+vo clips/misc/misc_022.ogg
+vo clips/misc/misc_023.ogg
+vo clips/misc/misc_024.ogg
+vo clips/misc/misc_025.ogg
+vo clips/misc/misc_026.ogg
+vo clips/misc/misc_027.ogg
+vo clips/misc/misc_028.ogg
+vo clips/misc/misc_029.ogg
+vo clips/player_good/player_good_line001.ogg
+vo clips/player_good/player_good_line002.ogg
+vo clips/player_good/player_good_line003.ogg
+vo clips/player_good/player_good_line004.ogg
+vo clips/player_good/player_good_line005.ogg
+vo clips/player_good/player_good_line006.ogg
+vo clips/player_good/player_good_line007.ogg
+vo clips/player_good/player_good_line008.ogg
+vo clips/player_good/player_good_line009.ogg
+vo clips/player_good/player_good_line010.ogg
+vo clips/player_good/player_good_line011.ogg
+vo clips/player_good/player_good_line012.ogg
+vo clips/player_good/player_good_line013.ogg
+vo clips/player_good/player_good_line014.ogg
+vo clips/player_good/player_good_line015.ogg
+vo clips/player_good/player_good_line016.ogg
+vo clips/player_good/player_good_line017.ogg
+vo clips/player_good/player_good_line018.ogg
+vo clips/player_good/player_good_line019.ogg
+vo clips/player_good/player_good_line020.ogg
+vo clips/player_good/player_good_line021.ogg
+vo clips/player_good/player_good_line022.ogg
+vo clips/player_good/player_good_line023.ogg
+vo clips/player_good/player_good_line024.ogg
+vo clips/player_good/player_good_line025.ogg
+vo clips/player_good/player_good_line026.ogg
+vo clips/player_good/player_good_line027.ogg
+vo clips/player_good/player_good_line028.ogg
+vo clips/player_good/player_good_line029.ogg
+vo clips/player_good/player_good_line030.ogg
+vo clips/player_good/player_good_line031.ogg
+vo clips/player_good/player_good_line032.ogg
+vo clips/player_good/player_good_line033.ogg
+vo clips/player_good/player_good_line034.ogg
+vo clips/player_good/player_good_line035.ogg
+vo clips/player_good/player_good_line036.ogg
+vo clips/player_good/player_good_line037.ogg
+vo clips/player_good/player_good_line038.ogg
+vo clips/player_good/player_good_line039.ogg
+vo clips/player_good/player_good_line040.ogg
+vo clips/player_good/player_good_line041.ogg
+vo clips/player_good/player_good_line042.ogg
+vo clips/player_good/player_good_line043.ogg
+vo clips/player_good/player_good_line044.ogg
+vo clips/player_good/player_good_line045.ogg
+vo clips/player_good/player_good_line046.ogg
+vo clips/player_good/player_good_line047.ogg
+vo clips/player_good/player_good_line048.ogg
+vo clips/player_good/player_good_line049.ogg
+vo clips/player_good/player_good_line050.ogg
+vo clips/player_good/player_good_line051.ogg
+vo clips/player_good/player_good_line052.ogg
+vo clips/viola_good/.DS_Store
+vo clips/viola_good/viola_good_line001.ogg
+vo clips/viola_good/viola_good_line002.ogg
+vo clips/viola_good/viola_good_line003.ogg
+vo clips/viola_good/viola_good_line004.ogg
+vo clips/viola_good/viola_good_line005.ogg
+vo clips/viola_good/viola_good_line006.ogg
+vo clips/viola_good/viola_good_line007.ogg
+vo clips/viola_good/viola_good_line008.ogg
+vo clips/viola_good/viola_good_line009.ogg
+vo clips/viola_good/viola_good_line010.ogg
+vo clips/viola_good/viola_good_line011.ogg
+vo clips/viola_good/viola_good_line012.ogg
+vo clips/viola_good/viola_good_line013.ogg
+vo clips/viola_good/viola_good_line014.ogg
+vo clips/viola_good/viola_good_line015.ogg
+vo clips/viola_good/viola_good_line016.ogg
+vo clips/viola_good/viola_good_line017.ogg
+vo clips/viola_good/viola_good_line018.ogg
+vo clips/viola_good/viola_good_line019.ogg
+vo clips/viola_good/viola_good_line020.ogg
+vo clips/viola_good/viola_good_line021.ogg
+vo clips/viola_good/viola_good_line022.ogg
+vo clips/viola_good/viola_good_line023.ogg
+vo clips/viola_good/viola_good_line024.ogg
+vo clips/viola_good/viola_good_line025.ogg
+vo clips/viola_good/viola_good_line026.ogg
+vo clips/viola_good/viola_good_line027.ogg
+vo clips/viola_good/viola_good_line028.ogg
+vo clips/viola_good/viola_good_line029-2.ogg
+vo clips/viola_good/viola_good_line029.ogg
+vo clips/viola_good/viola_good_line030.ogg
+vo clips/viola_good/viola_good_line031.ogg
+vo clips/viola_good/viola_good_line032.ogg
+vo clips/viola_good/viola_good_line033.ogg
+vo clips/viola_good/viola_good_line034.ogg
+vo clips/viola_good/viola_good_line035.ogg
+vo clips/viola_good/viola_good_line036.ogg
+vo clips/viola_good/viola_good_line037.ogg
+vo clips/viola_good/viola_good_line038-2.ogg
+vo clips/viola_good/viola_good_line038.ogg
+vo clips/viola_good/viola_good_line039.ogg
+vo clips/viola_good/viola_good_line040.ogg
+vo clips/viola_good/viola_good_line041.ogg
+vo clips/viola_good/viola_good_line042.ogg
+vo clips/viola_good/viola_good_line043.ogg
+vo clips/viola_good/viola_good_line044.ogg
+vo clips/viola_good/viola_good_line045.ogg
+vo clips/viola_good/viola_good_line046.ogg
+vo clips/viola_good/viola_good_line047.ogg
+vo clips/branching/.DS_Store
+vo clips/branching/branching_line001.ogg
+vo clips/branching/branching_line002.ogg
+vo clips/branching/branching_line003.ogg
+vo clips/branching/branching_line004.ogg
+vo clips/branching/branching_line005.ogg
+vo clips/branching/branching_line006.ogg
+vo clips/branching/branching_line007.ogg
+vo clips/branching/branching_line008.ogg
+vo clips/branching/branching_line009.ogg
+vo clips/branching/branching_line010.ogg
+vo clips/branching/branching_line011.ogg
+vo clips/branching/branching_line012.ogg
+vo clips/branching/branching_line013.ogg
+vo clips/branching/branching_line014.ogg
+vo clips/branching/branching_line015.ogg
+vo clips/branching/branching_line016.ogg
+vo clips/branching/branching_line017.ogg
+vo clips/branching/branching_line018.ogg
+vo clips/branching/branching_line019.ogg
+vo clips/branching/branching_line020.ogg
+vo clips/branching/branching_line021 .ogg
+vo clips/branching/branching_line022.ogg
+vo clips/branching/branching_line023.ogg
+vo clips/branching/branching_line024.ogg
+vo clips/branching/branching_line025.ogg
+vo clips/branching/branching_line026.ogg
+vo clips/branching/branching_line027.ogg
+vo clips/branching/branching_line028.ogg
+vo clips/branching/branching_line029.ogg
 cache/bytecode-39.rpyb
 cache/py3analysis.rpyb
 cache/screens.rpyb
 cache/shaders.txt
 images/.DS_Store
+images/BG_ClinicRoom@2.png
+images/BG_WaitingRoom.png
+images/BG_WaitingRoom_Achievement_Hover.png
+images/BG_WaitingRoom_Achievement_Idle.png
+images/BG_WaitingRoom_Full@2.png
+images/BG_WaitingRoom_PatientProfile_Hover.png
+images/BG_WaitingRoom_PatientProfile_Idle.png
+images/BG_WaitingRoom_PlayerProgresss_Hover.png
+images/BG_WaitingRoom_PlayerProgresss_Idle.png
 images/awards globe hover.png
 images/awards globe idle.png
 images/awards globe insensitive.png
@@ -42,6 +234,7 @@ images/bg current module hover.png
 images/bg current module idle.png
 images/bg darken overlay.png
 images/bg getaward.png
+images/bg glossary.png
 images/bg home menu.png
 images/bg home screen.png
 images/bg lighten overlay.png
@@ -53,6 +246,7 @@ images/bg notepad.png
 images/bg patient room.png
 images/bg poster.png
 images/bg scorecard.png
+images/bg searchbox.png
 images/bg status name text.png
 images/bg unlocked module hover.png
 images/bg unlocked module idle.png
@@ -62,6 +256,8 @@ images/button pencil hover.png
 images/button pencil idle.png
 images/button poster hover.png
 images/button poster idle.png
+images/button search hover.png
+images/button search idle.png
 images/button shelf hover.png
 images/button shelf idle.png
 images/empathetic.png
@@ -71,6 +267,7 @@ images/files folder hover.png
 images/files folder idle.png
 images/goodlistener.png
 images/greatcommunicator.png
+images/mini search icon.png
 images/profiles roc hover.png
 images/profiles roc idle.png
 images/profiles teddy hover.png
@@ -90,8 +287,15 @@ images/status up.png
 images/ui button x hover.png
 images/ui button x idle.png
 images/ui medicalfiles name bg.png
-tl/None/common.rpymc
-saves/1-1-LT1.save
+images/viola_confused_sprite.png
+images/viola_happy_sprite.png
+images/viola_laughing_sprite.png
+images/viola_neutral_sprite.png
+images/viola_sad_sprite.png
+images/viola_surprised_sprite.png
+images/viola_thoughtful_sprite.png
+images/viola_uncomfortable_sprite.png
+images/viola_upset_sprite.png
 saves/_reload-2-LT1.save
 saves/auto-1-LT1.save
 saves/auto-10-LT1.save
@@ -105,9 +309,25 @@ saves/auto-8-LT1.save
 saves/auto-9-LT1.save
 saves/navigation.json
 saves/persistent
-saves/quick-1-LT1.save
-saves/quick-2-LT1.save
-saves/quick-3-LT1.save
+audio/.DS_Store
+audio/Branching.wav
+audio/Player good.wav
+audio/README.txt
+audio/TGD Game Jam VO_Confirm Viola's pronouns mixdown.wav
+audio/TGD Game Jam VO_Good Scenario_mixdown.wav
+audio/TGD Game Jam VO_Hello Script mixdown.wav
+audio/TGD Game Jam VO_I recognize you (ask about viola)mixdown.wav
+audio/TGD Game Jam VO_I recognize you mixdown.wav
+audio/TGD Game Jam VO_Intro yourself (name and pronouns)mixdown.wav
+audio/TGD Game Jam VO_ask for viola's pronouns mixdown.wav
+audio/TGD Game Jam VO_ask for viola's pronouns.wav
+audio/TGD Game Jam VO_confirm Viola's name mixdown.wav
+audio/TGD Game Jam VO_intro yourself (name, pronouns, gender-affirming values)mixdown.wav
+audio/TGD Game Jam VO_introduce yourself (name)mixdown.wav
+audio/TGD Game Jam VO_move on mixdown.wav
+audio/TGD Game Jam VO_so you're hear about your mixdown.wav
+audio/TGD Game Jam VO_you must be mixdown.wav
+audio/Viola good.wav
 gui/.DS_Store
 gui/bg poster.png
 gui/bg status.png
@@ -195,3 +415,4 @@ gui/scrollbar/vertical_hover_bar.png
 gui/scrollbar/vertical_hover_thumb.png
 gui/scrollbar/vertical_idle_bar.png
 gui/scrollbar/vertical_idle_thumb.png
+.vscode/settings.json

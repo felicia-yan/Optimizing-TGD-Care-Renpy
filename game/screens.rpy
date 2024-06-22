@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 ## Initialization
 ################################################################################
 
@@ -283,7 +283,7 @@ screen quick_menu():
             textbutton _("Save") action ShowMenu('save')
             # textbutton _("Q.Save") action QuickSave()
             # textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Preferences") action ShowMenu('preferences')
+            textbutton _("Options") action ShowMenu('options')
             textbutton _("Load") action ShowMenu('load')
 
 
@@ -316,17 +316,17 @@ style quick_button_text:
 
 screen navigation():
     if renpy.get_screen("main_menu"):
-        grid 3 2:
+        vbox:
             style_prefix "gnavigation"
 
-            xalign 0.5
-            yalign 0.8
+            xalign 0.1
+            yalign 0.6
 
-            spacing 80
+            spacing 20
 
             if main_menu:
 
-                textbutton _("Start") action Start()
+                textbutton _("New Game") action Start()
 
             else:
 
@@ -334,9 +334,12 @@ screen navigation():
 
                 textbutton _("Save") action ShowMenu("save")
 
-            textbutton _("Load") action ShowMenu("load")
+                textbutton _("Achievements") action ShowMenu("achievements")
 
-            textbutton _("Preferences") action ShowMenu("preferences")
+            textbutton _("Load Save") action ShowMenu("load")
+
+            textbutton _("Options") action ShowMenu("options")
+
 
             if _in_replay:
 
@@ -377,9 +380,12 @@ screen navigation():
 
                 textbutton _("Save") action ShowMenu("save")
 
+                textbutton _("Achievements") action ShowMenu("achievements")
+
             textbutton _("Load") action ShowMenu("load")
 
-            textbutton _("Preferences") action ShowMenu("preferences")
+            textbutton _("Options") action ShowMenu("options")
+
 
             if _in_replay:
 
@@ -415,12 +421,12 @@ style navigation_button_text:
     font "Gilbert.otf"
 
 style gnavigation_button: 
-    background "#01B4E3"
-    padding (20, 20)
+    properties gui.button_properties("choice_button")
+    xsize 350
 style gnavigation_button_text: 
     xalign 0.5
     idle_color "#FFFFFF"
-    hover_color "#ADEEFF"
+    hover_color "#026F9D"
 
 
 
@@ -800,18 +806,18 @@ style slot_button_text:
     properties gui.text_properties("slot_button")
 
 
-## Preferences screen ##########################################################
+## Options screen ##########################################################
 ##
-## The preferences screen allows the player to configure the game to better suit
+## The options screen allows the player to configure the game to better suit
 ## themselves.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
-screen preferences():
+screen options():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("Options"), scroll="viewport"):
 
         vbox:
 

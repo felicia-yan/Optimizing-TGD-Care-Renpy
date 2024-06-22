@@ -4,136 +4,278 @@ default searchName = None
 default fullNames = {
     "viola": ["Viola Phoenix", "Transfeminine patient"],
     "roc": ["Roc Garcia", "Transmasculine patient"],
-    "teddy": ["Teddy Williams", "Nonbinary patient"]
+    "olivia": ["Olivia Li", "Nonbinary patient"]
 }
 
 screen home(): 
-    modal True
+    # music 
+    on "show" action Play("music", "waiting_room_mario_version.mp3", loop=True, fadein=3)
+    on "hide" action Stop("music", fadeout=2)
+
     # menu button
     textbutton "Menu": 
-        xpos 1780
+        style_prefix "player_select"
+        xpos 125
         ypos 55
-        action Show("menuUI"), Hide("home")
+        action Hide("home"), Show("menuUI")
+    
     # computer
     imagebutton:
-        xpos 1165
-        ypos 395
-        auto "button computer %s.png"
+        xpos 350
+        ypos 360
+        idle Image("BG_WaitingRoom_PatientProfile_Idle.png", oversample = 2)
+        hover Image("BG_WaitingRoom_PatientProfile_Hover.png", oversample = 2)
+        tooltip "{font=Gilbert.otf}{size=40}Computer{/size}{/font} \nReview patient records"
         action Show("computer")
     # poster
     imagebutton: 
-        xpos 1600
-        ypos 100
-        auto "button poster %s.png"
+        xpos 860
+        ypos 140
+        idle Image("BG_WaitingRoom_Achievement_Idle.png", oversample = 2)
+        hover Image("BG_WaitingRoom_Achievement_Hover.png", oversample = 2)
+        tooltip "{font=Gilbert.otf}{size=40}Roadmap{/size}{/font} \nCheck game progress"
         action Show("poster")
-    # awards shelf
+    # awards items
     imagebutton: 
-        xpos 500
-        ypos 100
-        auto "button shelf %s.png"
+        xpos 250
+        ypos 300
+        idle Image("BG_WaitingRoom_PlayerProgresss_Idle.png", oversample = 2)
+        hover Image("BG_WaitingRoom_PlayerProgresss_Hover.png", oversample = 2)
+        tooltip "{font=Gilbert.otf}{size=40}{color=#00B3E3}Good Listener Award{/color}{/size}{/font} \n {i}Viola Visit 2{/i}\n You were an empathetic and caring listener in this visit!"
         action Show("awards")
+    
     # clickable patient sprites for waiting room 
     # viola button
     imagebutton:
         xpos 569
-        ypos 403
+        ypos 460
         auto "sprite viola %s.png"
-        action SetVariable("patientName", "viola"), Jump("startcaseViola")
-    # teddy button
+        tooltip "{font=Gilbert.otf}{size=40}{color=#7689ED}Viola{/color}{/size}{/font}"
+        action SetVariable("patientName", "viola"), Show("visitSelect", visitSelectPatient="viola")
+    # olivia button
     imagebutton:
-        xpos 288
-        ypos 470
+        xpos 1700
+        ypos 350
         auto "sprite teddy %s.png"
-        action SetVariable("patientName", "teddy"), Jump("startcaseTeddy")
+        tooltip "{font=Gilbert.otf}{size=40}{color=#7689ED}Olivia{/color}{/size}{/font}"
+        action SetVariable("patientName", "olivia"), Show("visitSelect", visitSelectPatient="olivia")
     # roc button
     imagebutton:
-        xpos 141
-        ypos 573
+        xpos 950
+        ypos 550
         auto "sprite roc %s.png"
-        action SetVariable("patientName", "roc"), Jump("startcaseRoc")
+        tooltip "{font=Gilbert.otf}{size=40}{color=#7689ED}Roc{/color}{/size}{/font}"
+        action SetVariable("patientName", "roc"), Show("visitSelect", visitSelectPatient="roc")
+    
+    # tooltips for buttons when hovered over
+    $ tooltip = GetTooltip()
 
+    if tooltip:
+        nearrect:
+            focus "tooltip"
+            prefer_top True
+
+            frame:
+                background Frame("tooltip.png")
+                padding (25, 25)
+                xalign 0.5
+                xmaximum 450
+                text tooltip: 
+                    text_align 0.5
+                    size 32
 
 screen menuUI(): 
     modal True
     frame: 
-        background "bg lighten overlay.png"
+        background "bg player select.png"
         xalign 0.5
         yalign 0.5
-        add "bg home menu.png"
         textbutton "Back": 
-            xpos 1780
-            ypos 55
-            action Hide("menuUI"), Jump("startHome")
+            style_prefix "player_select"
+            xpos 125
+            ypos 965
+            action Hide("menuUI"), Show("home")
         vbox: 
             style_prefix "choice"
-            yalign 0.7
+            xalign 0.5
+            yalign 0.5
+            text "Menu": 
+                font "Gilbert.otf"
+                size 60
+                xalign 0.5
             textbutton _("Save Game") action ShowMenu('save')
             textbutton _("Load Game") action ShowMenu('load')
-            textbutton _("Preferences") action ShowMenu('preferences')
+            textbutton _("Options") action ShowMenu('options')
             textbutton _("Exit to Title Screen") action MainMenu()
 
 
-
+# first computer screen, buttons for each character profile
 screen computer(): 
     modal True
-    add "bg medicalfiles.png"
-    textbutton "Exit": 
-        xpos 1762
-        ypos 55
-        action Hide("computer")
+    add "bg player select.png"
     frame: 
         xalign 0.5
         yalign 0.5
         background None
+
+        textbutton "Back": 
+            style_prefix "player_select"
+            xpos 125
+            ypos 965
+            action Hide("computer"), Show("home")
+
         vbox: 
             xalign 0.5
-            yalign 0.3
-            text "Patient Overview":
+            yalign 0.05
+            text "Select a patient to view their medical records":
                 font "Gilbert.otf"
                 xalign 0.5
-                size 50
+                size 45
                 textalign 0.5
-            text "Select the patient you would like to view.": 
-                font "SourceSans3.ttf"
-                xalign 0.5
-                textalign 0.5
+                color "#FFFFFF"
 
     # buttons for each patient to see patient records
         hbox: 
-            style_prefix "profiles"
+            style_prefix "player_select"
             xalign 0.5
             yalign 0.7
-            spacing 100
+            spacing 50
             vbox: 
-                imagebutton: 
-                    auto "profiles viola %s.png"
+                add "player select viola.png"
+                textbutton "Viola": 
                     action SetVariable("searchName", "viola"), Hide("computer"), Show("searchRecords")
-                text "Viola Phoenix"
             vbox: 
-                imagebutton: 
-                    auto "profiles roc %s.png"
+                add "player select roc.png"
+                textbutton "Roc":
                     action SetVariable("searchName", "roc"), Hide("computer"), Show("searchRecords")
-                text "Roc Garcia"
             vbox: 
-                imagebutton: 
-                    auto "profiles teddy %s.png"
-                    action SetVariable("searchName", "teddy"), Hide("computer"), Show("searchRecords")
-                text "Teddy Williams"
+                add "player select olivia.png"
+                textbutton "Olivia":
+                    action SetVariable("searchName", "olivia"), Hide("computer"), Show("searchRecords")
 
+style player_select_button is default:
+    properties gui.button_properties("choice_button")
+    xsize 180
+    xalign 0.5
+    ypos -650
+
+style player_select_button_text: 
+    xalign 0.5
+    size 40
+    idle_color "#FFFFFF"
+    hover_color "#026F9D"
+
+
+# screen for when player clicks on patient in the waiting room to preview upcoming visit
+screen visitSelect(visitSelectPatient): 
+    modal True
+    add "bg player select.png"
+    frame: 
+        xalign 0.5
+        yalign 0.5
+        background None
+
+        textbutton "Back": 
+            style_prefix "player_select"
+            xpos 125
+            ypos 965
+            action Hide("visitSelect"), Show("home")
+
+        vbox: 
+            xalign 0.5
+            yalign 0.05
+            text "Preview the next visit":
+                font "Gilbert.otf"
+                xalign 0.5
+                size 45
+                textalign 0.5
+                color "#FFFFFF"
+
+    # layout for 
+        hbox: 
+            style_prefix "player_select"
+            xalign 0.5
+            yalign 0.7
+            spacing 60
+            vbox: 
+                add "player select [visitSelectPatient].png"
+                text "[fullNames[visitSelectPatient][0]]": 
+                    style_prefix "visit_select_title"
+                    ypos -650
+            vbox: 
+                xsize 750
+                spacing 20
+                text "VISIT 1": 
+                    style_prefix "visit_select_title"
+                    xalign 0.0
+                    size 50
+                text "Estimated time: 10 minutes"
+
+                frame: 
+                    xfill True
+                    yminimum 150
+                    padding (20, 20)
+                    background Frame("visit yellow text bg.png", 0, 0)
+                    text "Summary"
+                
+                text "Learning Objectives": 
+                    style_prefix "visit_select_title"
+                    size 40
+                    xalign 0.0
+                frame: 
+                    xfill True
+                    yminimum 150
+                    padding (20, 20)
+                    background Frame("visit yellow text bg.png", 0, 0)
+                    text "Objectives"
+                
+                hbox: 
+                    xalign 0.5
+                    ypos 40
+                    spacing 100
+                    style_prefix "visit_select"
+                    textbutton _("Review files") action SetVariable("searchName", "roc"), Hide("visitSelect"), Show("searchRecords")
+                    textbutton _("Begin visit") action SetVariable("patientName", "viola"), Hide("visitSelect"), Jump("startcaseViola")
+                
+style visit_select_title_text: 
+    font "Gilbert.otf"
+    xalign 0.5
+    size 45
+    textalign 0.5
+    color "#000000"
+
+style visit_select_button: 
+    properties gui.button_properties("choice_button")
+    xsize 300
+    padding (20, 20)
+
+style visit_select_button_text: 
+    xalign 0.5
+    size 40
+    idle_color "#FFFFFF"
+    hover_color "#026F9D"
+
+
+default currentRecordsTab = "emr"
 # options to look at medical record, conversation logs, replay past visits, etc.
 screen searchRecords(): 
+    on "hide" action SetVariable("currentRecordsTab", "emr")
+
     modal True
-    add "bg medicalfiles.png"
+    add "bg searchrecords.png"
     textbutton "Back": 
-            xpos 1550
-            ypos 200
+            style_prefix "player_select"
+            xpos 130
+            ypos 970
             action Hide("searchRecords"), Show("computer")
+
     frame: 
         background None
         xalign 0.5
-        yalign 0.55
+        yalign 0.5
+
         hbox: 
-            spacing 60
+            spacing 80
             vbox: 
                 xalign 0.5
                 yalign 0.5
@@ -143,26 +285,95 @@ screen searchRecords():
                     size 50
                     xalign 0.5
                     text_align 0.5
-                add "profiles [searchName] idle.png": 
+                add "records headshot [searchName].png": 
                     xalign 0.5
-                textbutton _("Start next visit!") action SetVariable("patientName", "viola"), Hide("searchRecords"), Jump("startcaseViola"): 
+                textbutton _("Begin visit") action SetVariable("patientName", "viola"), Hide("searchRecords"), Jump("startcaseViola"): 
                     style_prefix "gnavigation"
                     xalign 0.5
-            vbox: 
-                style_prefix "searchRecords"
-                spacing gui.choice_spacing
-                textbutton _("Medical records") action Show("openPatientFile")
-                textbutton _("Past visit recaps")
-                textbutton _("Past conversations")
-                textbutton _("Replay past visits")
-                textbutton _("Learning material")
+                    xsize 350
 
-style searchRecords_button is default:
-    properties gui.button_properties("choice_button")
-    xsize 450
-style searchRecords_button_text is default:
-    properties gui.text_properties("choice_button")
-    size 30
+            hbox: 
+                spacing 0
+                # button tabs to select which page to go to 
+                vbox: 
+                    xalign 0.2
+                    yalign 0.4
+                    imagebutton: 
+                        idle "records tab emr.png"
+                        action SetVariable("currentRecordsTab", "emr")
+                    imagebutton: 
+                        idle "records tab recaps.png"
+                        action SetVariable("currentRecordsTab", "recaps")
+                    imagebutton: 
+                        idle "records tab convos.png"
+                        action SetVariable("currentRecordsTab", "convos")
+                    imagebutton: 
+                        idle "records tab replay.png"
+                        action SetVariable("currentRecordsTab", "replay")
+                    imagebutton: 
+                        idle "records tab learning.png"
+                        action SetVariable("currentRecordsTab", "learning")
+                
+                # scrollable viewport for different tabs of record
+                side "c": 
+                    area (0, 175, 1100, 1000)
+                    viewport id "vp": 
+                        draggable True
+                        arrowkeys True
+                        mousewheel True
+                        scrollbars "vertical"
+                        xsize 1100
+                        ysize 1000
+                        frame: 
+                            xfill True
+                            yminimum 920
+                            xalign 0.5
+                            padding (0, 40)
+                            background Frame("records bg [currentRecordsTab].png", 10, 10)
+                            if (currentRecordsTab == "emr"):
+                                vbox:
+                                    xalign 0.5
+                                    text "Electronic Medical Record":
+                                        style_prefix "searchRecords_title"
+                            
+                            if (currentRecordsTab == "recaps"):
+                                vbox:
+                                    xalign 0.5
+                                    text "Visit Recaps":
+                                        style_prefix "searchRecords_title"
+                            
+                            if (currentRecordsTab == "convos"):
+                                vbox:
+                                    xalign 0.5
+                                    text "Past Conversations":
+                                        style_prefix "searchRecords_title"
+                            
+                            if (currentRecordsTab == "replay"):
+                                vbox:
+                                    xalign 0.5
+                                    text "Replay Past Visits":
+                                        style_prefix "searchRecords_title"
+                            
+                            if (currentRecordsTab == "learning"):
+                                vbox:
+                                    xalign 0.5
+                                    text "Learning Materials":
+                                        style_prefix "searchRecords_title"
+
+            # vbox: 
+            #     style_prefix "searchRecords"
+            #     spacing gui.choice_spacing
+                
+            #     textbutton _("Medical records") action Show("openPatientFile")
+            #     textbutton _("Past visit recaps")
+            #     textbutton _("Past conversations")
+            #     textbutton _("Replay past visits")
+            #     textbutton _("Learning material")
+
+style searchRecords_title_text: 
+    font "Gilbert.otf"
+    size 45
+    xalign 0.5
 
 style profiles_text: 
     xalign 0.5
@@ -171,100 +382,87 @@ style profiles_text:
 
 screen poster(): 
     modal True
-    add "bg poster.png"
+    add "bg blank.png"
+    text "Progress Roadmap":
+        font "Gilbert.otf"
+        xpos 60
+        ypos 80
+        size 50
     textbutton "Back": 
-            xpos 1780
-            ypos 55
-            action Hide("poster")
-    frame: 
-        text "Progress Roadmap": 
-            xpos 250
-            ypos 210
-            font "Gilbert.otf"
-            size 50
-        background None
-        # buttons for each module 
-        imagebutton: 
-            xpos 270
-            ypos 320
-            auto "bg unlocked module %s.png"
-            action Hide("poster")
-        imagebutton: 
-            xpos 470
-            ypos 310
-            auto "bg unlocked module %s.png"
-            action Hide("poster")
-        imagebutton: 
-            xpos 670
-            ypos 310
-            auto "bg current module %s.png"
-            action Hide("poster")
-        imagebutton: 
-            xpos 870
-            ypos 260
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1095
-            ypos 310
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1320
-            ypos 330
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 270
-            ypos 560
-            auto "bg current module %s.png"
-            action Hide("poster")
-        imagebutton: 
-            xpos 470
-            ypos 500
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 670
-            ypos 575
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 865
-            ypos 575
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1065
-            ypos 575
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1265
-            ypos 575
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1560
-            ypos 560
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 270
-            ypos 820
-            auto "bg current module %s.png"
-            action Hide("poster")
-        imagebutton: 
-            xpos 470
-            ypos 820
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 690
-            ypos 760
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 910
-            ypos 820
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1120
-            ypos 830
-            auto "bg locked module %s.png"
-        imagebutton: 
-            xpos 1340
-            ypos 810
-            auto "bg locked module %s.png"
+        xpos 1780
+        ypos 55
+        action Hide("poster")
+
+    # scrollable viewport for roadmap
+    side "c": 
+        area (0, 80, 4050, 1080)
+
+        viewport id "vp":
+            draggable True
+            arrowkeys True
+            mousewheel True
+            scrollbars "horizontal"
+            xsize 1900
+            ysize 1000
+
+            frame: 
+                background "bg roadmap.png" 
+                yalign 0.6
+                xalign 0.5
+                margin (100, 100)
+                hbox: 
+                    spacing 100
+                    style_prefix "roadmap"
+                    hbox: 
+                        spacing 120
+                        yalign 0.5
+                        textbutton "Introduction" action Hide("poster"), Hide("home"), Jump("start")
+                        textbutton "Orientation" action Hide("poster"), Hide("home"), Jump("tutorial")
+                        textbutton "Home Screen" action Hide("poster"), Hide("home"), Jump("startHome")
+                    vbox: 
+                        spacing 120
+                        hbox:
+                            spacing 100 
+                            textbutton "Roc: Visit 1"
+                            textbutton "Roc: Visit 2"
+                            textbutton "Roc: Visit 3"
+                            textbutton "Mini-Case: Family Building"
+                            textbutton "Roc: Visit 4"
+                            textbutton "Mini-Case: Insurance"
+                            textbutton "Roc: Visit 5"
+                        hbox:
+                            spacing 100 
+                            textbutton "Viola: Visit 1" action Hide("poster"), Hide("home"), Jump("startViola_Visit_1")
+                            textbutton "Viola: Visit 2"
+                            textbutton "Mini-Case: E.D. Service Recovery"
+                            textbutton "Viola: Visit 3"
+                            textbutton "Viola: Visit 4"
+                            textbutton "Viola: Visit 5"
+                        hbox:
+                            spacing 100 
+                            textbutton "Olivia: Visit 1"
+                            textbutton "Mini-Case: Teaching Strategies"
+                            textbutton "Olivia: Visit 2"
+                            textbutton "Mini-Case: Upstander/Bystander"
+                            textbutton "Viola: Visit 3"
+
+
+
+style roadmap_button:
+    background "#f0f0f0"
+    padding (10, 10)
+    xsize 230
+    ysize 140
+    xalign 0.5
+
+style roadmap_button_text:
+    xalign 0.5
+    textalign 0.5
+    color "#2a2a2a"
+    hover_color "#5330dd"
+    font "Gilbert.otf"
+
+
 
 screen awards():
     modal True
@@ -361,10 +559,19 @@ screen badges():
 
 
 label startHome: 
-    scene bg home screen
+
+    # Add Key Event that signifies end or introduction/progress GA4
+    $ analytics.event("homescreen", "start_homescreen")
+
+    image bg_waitingroom = Image("BG_WaitingRoom.png", oversample = 2)
+    scene bg_waitingroom
     show screen home
 
     mentor.char "This is the home screen!"
 
+    $ achievement.grant("Getting Oriented")
+
     mentor.char "This is where you will find your patients, begin patient visits, and review your progress." 
+    call screen home
+    
     return

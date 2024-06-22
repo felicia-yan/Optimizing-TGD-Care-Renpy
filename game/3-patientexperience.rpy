@@ -64,7 +64,7 @@ screen openPatientFile():
     textbutton "Exit": 
         xpos 1762
         ypos 55
-        action Hide("openPatientFile")
+        action Hide("openPatientFile"), Return()
 
     # scrollable viewport for medical information
     side "c": 
@@ -310,11 +310,11 @@ screen notepad():
         ysize 750
         has vbox
         input: 
-            default ""
             value VariableInputValue('notes') 
             color "#000000"
             copypaste True
             multiline True
+            size 35
 
 # look up screen for glossary of clinial reference material
 screen glossary(): 
@@ -457,7 +457,7 @@ screen getAward(awardIndex):
                 size 60
                 xalign 0.5
                 color "#000000"
-            text "Achieved the best ending for Viola's first visit": 
+            text "Achieved the best ending for Viola's first visit":
                 size 35
                 textalign 0.5
             add "awards trophy idle.png": 
@@ -466,7 +466,216 @@ screen getAward(awardIndex):
                             style_prefix "gnavigation"
                             xalign 0.5
 
-                                
+screen debrief(visitTitle): 
+    add "bg debrief.png"
+
+    frame: 
+        background None
+        xalign 0.5
+        yalign 0.4
+        xmaximum 1650
+
+        vbox: 
+            spacing 20
+            text "Viola Phoenix: Visit 1 Debrief": 
+                font "Gilbert.otf"
+                size 50
+                xalign 0.5
+            hbox: 
+                spacing 20
+                vbox: 
+                    spacing 40
+                    hbox: 
+                        spacing 40
+                        frame: 
+                            background None
+                            xsize 800
+                                # trust and stress bars
+                            text "You met Viola for the first time and performed a comprehensive medical review. You discussed Viola's hypertension and family history of cardiovascular disease. You also reviewed Viola's history of gender-affirming care and learned that she is on a fairly high dose of estradiol and used to be on spironolactone, but stopped on her own due to side effects.": 
+                                size 30
+                        vbox:
+                            xalign 0.5
+                            text "Scores:": 
+                                font "Gilbert.otf"
+                                size 40
+                            grid 2 1: 
+                                xalign 0.5
+                                yalign 0.5
+                                spacing 20
+                                frame:
+                                    background "score button.png"
+                                    hbox: 
+                                        xsize 300
+                                        ysize 100
+                                        xalign 0.5
+                                        spacing 20
+                                        text "TRUST":
+                                            font "SourceSans3.ttf"
+                                            size 24
+                                            color "#FFFFFF"
+                                            italic True
+                                            textalign 0.5
+                                            xalign 0.5
+                                            yalign 0.5
+                                        text "22/25":
+                                            font "Gilbert.otf"
+                                            size 50
+                                            color "#FFFFFF"
+                                            textalign 0.5
+                                            xalign 0.5
+                                            yalign 0.5
+                                frame:
+                                    background "score button.png"
+                                    hbox: 
+                                        xsize 300
+                                        ysize 100
+                                        xalign 0.5
+                                        spacing 30
+                                        text "STRESS \nREDUCTION":
+                                            font "SourceSans3.ttf"
+                                            size 24
+                                            color "#FFFFFF"
+                                            italic True
+                                            textalign 0.5
+                                            xalign 0.5
+                                            yalign 0.5
+                                        text "10/19":
+                                            font "Gilbert.otf"
+                                            size 50
+                                            color "#FFFFFF"
+                                            textalign 0.5
+                                            xalign 0.5
+                                            yalign 0.5
+                    
+                    hbox: 
+                        spacing 80
+                        xalign 0.5
+                        vbox: 
+                            text "Key Choices": 
+                                font "Gilbert.otf"
+                                size 40
+                            grid 3 2: 
+                                yalign 0.5
+                                spacing 50
+                                style_prefix "debriefChoices"
+                                textbutton "Asked for Viola's pronouns":
+                                    if decisionScores[0] >= 5: 
+                                        style_prefix "debriefGood"
+                                    selected (topicsReviewed[0])
+                                    action Jump("viola1Debrief_Pronouns")
+                                textbutton "Let Viola set visit goals":
+                                    if decisionScores[1] >= 5: 
+                                        style_prefix "debriefGood"
+                                    selected (topicsReviewed[1])
+                                    action Jump("viola1Debrief_VisitGoals")
+                                textbutton "Asked Viola about her past experiences":
+                                    if decisionScores[2] >= 5: 
+                                        style_prefix "debriefGood"
+                                    selected (topicsReviewed[2])
+                                    action Jump("viola1Debrief_PastExperiences")
+                                textbutton "Got a comprehensive look at Viola's GAC":
+                                    if decisionScores[3] >= 5: 
+                                        style_prefix "debriefGood"
+                                    selected (topicsReviewed[3])
+                                    action Jump("viola1Debrief_GAC")
+                                textbutton "Gained Viola's trust by maintaining hormone therapy":
+                                    if decisionScores[4] >= 5: 
+                                        style_prefix "debriefGood"
+                                    selected (topicsReviewed[4])
+                                    action Jump("viola1Debrief_HormoneTherapy")
+    if sum(topicsReviewed) >= 3: 
+        textbutton "Continue":
+            xpos 1600
+            ypos 900
+            action Hide("debrief"), Jump("violaVisit1_1F_End")
+
+
+style debriefChoices_button:
+    padding (10, 10)
+    idle_background "bad choice button idle.png"
+    hover_background "bad choice button hover.png"
+    selected_idle_background "bad choice button selected.png"
+    selected_hover_background "bad choice button selected.png"
+    xsize 330
+    ysize 130
+    
+style debriefChoices_button_text:
+    xalign 0.5
+    yalign 0.5
+    textalign 0.5
+    size 30
+    color "#040404"
+    font "SourceSans3.ttf"
+    bold True
+    line_spacing -5
+
+style debriefGood_button:
+    padding (10, 10)
+    xalign 0.5
+    idle_background "good choice button idle.png"
+    hover_background "good choice button hover.png"
+    selected_idle_background "good choice button selected.png"
+    selected_hover_background "good choice button selected.png"
+    xsize 330
+    ysize 130
+
+style debriefGood_button_text: 
+    xalign 0.5
+    textalign 0.5
+    size 30
+    color "#ffffff"
+    font "SourceSans3.ttf"
+    bold True
+    line_spacing -5
+
+default topicsReviewed = []
+
+label viola1Debrief_Pronouns: 
+    mentor.char "Excellent job! By introducing yourself with your name and pronouns, you immediately set a respectful and inclusive tone." 
+    
+    mentor.char "This approach invites Viola to share her pronouns if she feels comfortable, helping to reduce her stress and build trust." 
+    
+    mentor.char "Remember, showing respect for a patient's identity is a fundamental step in providing compassionate and effective care!"
+
+    $ topicsReviewed[0] = 1
+    jump violaVisit1_1F_Continue
+
+
+label viola1Debrief_VisitGoals: 
+    mentor.char "Excellent approach! By asking Viola to share her goals and concerns, you empower her to take an active role in her care."
+    
+    mentor.char "This approach respects her autonomy and helps build trust, showing that you value her input and are committed to holistically addressing her needs." 
+    
+    mentor.char "Continue fostering an open dialogue to ensure Viola feels heard and supported throughout her visits."
+   
+    $ topicsReviewed[1] = 1
+    jump violaVisit1_1F_Continue
+
+label viola1Debrief_PastExperiences: 
+    mentor.char "Great job! By asking Viola about her past experiences with healthcare, you create an opportunity for her to share valuable insights into her previous challenges and expectations." 
+    
+    mentor.char "This not only helps you understand the sources of her stress and distrust but also demonstrates your willingness to listen and learn from her experiences." 
+   
+    $ topicsReviewed[2] = 1
+    jump violaVisit1_1F_Continue
+
+label viola1Debrief_GAC: 
+    mentor.char "Excellent work! By asking Viola to share her gender-affirming care history, you show genuine interest in understanding her journey and the specific challenges she has faced." 
+    
+    mentor.char "Continue to engage with open-ended questions to fully support Viola in her healthcare journey."
+    
+    $ topicsReviewed[3] = 1
+    jump violaVisit1_1F_Continue
+
+label viola1Debrief_HormoneTherapy: 
+    mentor.char "It’s important to balance safety and patient needs when managing hormone therapy."
+    
+    mentor.char "While your intention to wait for lab results before adjusting Viola’s prescription is medically sound, your initial hesitancy and lack of reassurance may have contributed to her stress."
+    
+    mentor.char "It’s crucial to communicate clearly and confidently to alleviate concerns. In future interactions, aim to provide immediate solutions that ensure continuity of care while still addressing safety concerns, to help maintain trust and reduce patient anxiety."
+    
+    $ topicsReviewed[4] = 1
+    jump violaVisit1_1F_Continue
 
 
 # start patient interaction
@@ -547,6 +756,7 @@ label startcaseViola:
                 show screen patientStatus("negative", "angry")
                 viola.char "This was a horrible visit. I won't be back."
 
+        jump violaVisit1_1F
 
         label learner_debrief: 
             mentor.char "The patient visit is over." 

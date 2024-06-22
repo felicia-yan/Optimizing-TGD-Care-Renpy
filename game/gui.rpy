@@ -106,12 +106,13 @@ define gui.textbox_yalign = 1.0
 
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
-define gui.name_xpos = 400
-define gui.name_ypos = -40
+define gui.name_xpos = 500
+define gui.name_ypos = -45
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
-define gui.name_xalign = 0.0
+define gui.name_xalign = 0.5
+define gui.name_yalign = 0.5
 
 ## The width, height, and borders of the box containing the character's name, or
 ## None to automatically size it.
@@ -120,7 +121,7 @@ define gui.namebox_height = None
 
 ## The borders of the box containing the character's name, in left, top, right,
 ## bottom order.
-define gui.namebox_borders = Borders(50, 10, 50, 10)
+define gui.namebox_borders = Borders(30, 10, 30, 10)
 
 ## If True, the background of the namebox will be tiled, if False, the
 ## background of the namebox will be scaled.
@@ -140,6 +141,31 @@ define gui.dialogue_width = 1116
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.dialogue_text_xalign = 0.0
 
+## The outlines of dialogue name text. This currently adds a drop shadow underneaht 
+## the name. 
+define gui.name_text_outlines = [ (0, "#00000025", 0, 5) ]
+
+# Styles for different colored nameboxes. 
+style namebox_red is namebox
+style namebox_orange is namebox
+style namebox_green is namebox
+style namebox_blue is namebox
+style namebox_magenta is namebox
+style namebox_purple is namebox
+
+style namebox_red:
+    background Frame("gui/namebox/red namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+style namebox_orange:
+    background Frame("gui/namebox/orange namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+style namebox_green:
+    background Frame("gui/namebox/green namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+style namebox_blue:
+    background Frame("gui/namebox/blue namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+style namebox_magenta:
+    background Frame("gui/namebox/magenta namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+style namebox_purple:
+    background Frame("gui/namebox/purple namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    
 
 ## Buttons #####################################################################
 ##
@@ -211,8 +237,8 @@ define gui.choice_button_borders = Borders(100, 20, 100, 20)
 define gui.choice_button_text_font = gui.text_font
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
-define gui.choice_button_text_idle_color = '#000000'
-define gui.choice_button_text_hover_color = "#FFFFFF"
+define gui.choice_button_text_idle_color = "#FFFFFF"
+define gui.choice_button_text_hover_color = "#026F9D"
 define gui.choice_button_text_insensitive_color = '#7070707f'
 
 
